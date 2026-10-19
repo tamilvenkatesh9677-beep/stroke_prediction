@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MACS-Net | Encephalic Stroke Risk Intelligence Platform</title>
+  <meta name="description" content="MACS-Net — Multi-modal Attention-driven Clinical and Spatial Network for real-time encephalic stroke risk prediction and personalised prevention roadmap." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+
+  <!-- ── Animated ambient background ── -->
+  <div class="bg-canvas" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="grid-lines"></div>
+  </div>
+
+  <!-- ══════════ NAVBAR ══════════ -->
+  <header class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#hero" class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 44 44" fill="none">
+            <circle cx="22" cy="22" r="20" stroke="url(#ng)" stroke-width="2"/>
+            <path d="M10 22 L15 15 L20 27 L25 10 L30 22 L34 22" stroke="url(#ng)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+              <linearGradient id="ng" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#2563EB"/><stop offset="1" stop-color="#059669"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <span>MACS<em>Net</em></span>
+      </a>
+      <nav class="nav-links" role="navigation">
+        <a href="#hero"      class="nav-a active" data-section="hero">Home</a>
+        <a href="#about"     class="nav-a"        data-section="about">Architecture</a>
+        <a href="#predictor" class="nav-a"        data-section="predictor">Predict</a>
+        <a href="#result-section" class="nav-a"   data-section="result-section">Results</a>
+      </nav>
+      <div class="nav-right">
+        <div class="api-status" id="apiStatus">
+          <span class="status-dot"></span>
+          <span class="status-label">Checking API…</span>
+        </div>
+        <a href="#predictor" class="nav-cta">Start Assessment →</a>
+      </div>
+      <button class="burger" id="burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ══════════ HERO ══════════ -->
+  <section class="hero" id="hero">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-chip">
+          <span class="chip-dot"></span>
+          Real-time AI · Clinical Decision Support
+        </div>
+        <h1>
+          Predict Encephalic<br/>
+          <span class="grad-text">Stroke Risk</span><br/>
+          Before It Strikes
+        </h1>
+        <p class="hero-sub">
+          MACS-Net (Multi-modal Attention-driven Clinical and Spatial Network) integrates 
+          structured clinical records through a dual-branch encoder and cross-modal attention 
+          fusion to deliver real-time stroke risk stratification and a personalised prevention roadmap.
+        </p>
+        <div class="hero-btns">
+          <a href="#predictor" class="btn-hero-primary">
+            <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/></svg>
+            Run Assessment
+          </a>
+          <a href="#about" class="btn-hero-ghost">Explore Architecture ↓</a>
+        </div>
+        <div class="hero-metrics">
+          <div class="hm-item">
+            <div class="hm-val" data-target="5110">0</div>
+            <div class="hm-lbl">Patient Records</div>
+          </div>
+          <div class="hm-sep"></div>
+          <div class="hm-item">
+            <div class="hm-val" id="apiRecall">~85%</div>
+            <div class="hm-lbl">Stroke Recall</div>
+          </div>
+          <div class="hm-sep"></div>
+          <div class="hm-item">
+            <div class="hm-val">11</div>
+            <div class="hm-lbl">Clinical Features</div>
+          </div>
+          <div class="hm-sep"></div>
+          <div class="hm-item">
+            <div class="hm-val">Real-Time</div>
+            <div class="hm-lbl">AI Inference</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="vis-card">
+          <div class="vis-ring r1"></div>
+          <div class="vis-ring r2"></div>
+          <div class="vis-ring r3"></div>
+          <div class="vis-core">
+            <svg viewBox="0 0 100 100" fill="none" class="brain-svg">
+              <ellipse cx="50" cy="48" rx="32" ry="28" stroke="url(#bg1)" stroke-width="1.5" opacity="0.5"/>
+              <path d="M18 48 Q25 28 50 26 Q75 28 82 48 Q75 68 50 70 Q25 68 18 48Z" stroke="url(#bg2)" stroke-width="1" fill="none" opacity="0.4"/>
+              <line x1="50" y1="20" x2="50" y2="76" stroke="url(#bg1)" stroke-width="0.8" stroke-dasharray="3,3" opacity="0.4"/>
+              <path d="M28 36 Q34 30 40 38 Q44 43 50 38 Q56 33 62 40 Q68 32 72 38" stroke="url(#bg1)" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+              <path d="M22 54 Q32 62 42 56 Q50 52 58 58 Q66 64 76 56" stroke="url(#bg2)" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+              <circle cx="50" cy="48" r="7" fill="url(#bgc)" opacity="0.9"/>
+              <circle cx="50" cy="48" r="3" fill="white" opacity="0.9"/>
+              <defs>
+                <linearGradient id="bg1" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#2563EB"/><stop offset="1" stop-color="#059669"/>
+                </linearGradient>
+                <linearGradient id="bg2" x1="0" y1="100" x2="100" y2="0" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#059669"/><stop offset="1" stop-color="#7C3AED"/>
+                </linearGradient>
+                <radialGradient id="bgc">
+                  <stop stop-color="#2563EB"/><stop offset="1" stop-color="#059669"/>
+                </radialGradient>
+              </defs>
+            </svg>
+          </div>
+          <div class="vis-tag t1"><span class="vt-icon">🫀</span><div><small>CFE Branch</small><strong>Clinical</strong></div></div>
+          <div class="vis-tag t2"><span class="vt-icon">🧠</span><div><small>SAM Branch</small><strong>Spatial</strong></div></div>
+          <div class="vis-tag t3"><span class="vt-icon">⚡</span><div><small>Risk Score</small><strong id="heroRisk">—</strong></div></div>
+          <div class="vis-pulse"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ ARCHITECTURE ══════════ -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="section-eyebrow">MACS-Net Architecture</div>
+      <h2 class="section-h2">How the AI Works</h2>
+      <p class="section-p">A dual-branch deep learning architecture designed specifically for encephalic stroke prediction, combining clinical and spatial representations via cross-modal attention fusion.</p>
+
+      <div class="arch-flow">
+        <div class="arch-node input-node">
+          <div class="arch-node-icon">📋</div>
+          <strong>Patient Input</strong>
+          <span>11 clinical features</span>
+        </div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-branches">
+          <div class="arch-branch branch-a">
+            <div class="arch-node branch-node">
+              <div class="arch-node-icon">🏥</div>
+              <strong>CFE Branch</strong>
+              <span>Clinical Feature Encoder</span>
+            </div>
+          </div>
+          <div class="arch-branch branch-b">
+            <div class="arch-node branch-node">
+              <div class="arch-node-icon">🧠</div>
+              <strong>SAM Branch</strong>
+              <span>Spatial Attention Module</span>
+            </div>
+          </div>
+        </div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-node fusion-node">
+          <div class="arch-node-icon">🔀</div>
+          <strong>Cross-Modal Attention Fusion</strong>
+          <span>Context-aware risk stratification</span>
+        </div>
+        <div class="arch-arrow">→</div>
+        <div class="arch-node output-node">
+          <div class="arch-node-icon">📊</div>
+          <strong>Risk Output + Roadmap</strong>
+          <span>Real-time prediction</span>
+        </div>
+      </div>
+
+      <div class="about-cards">
+        <div class="ac" data-delay="0">
+          <div class="ac-icon" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
+          </div>
+          <h3>Clinical Feature Encoder</h3>
+          <p>Encodes 11 structured patient indicators — age, hypertension, cardiac conditions, blood glucose, BMI, smoking history, and residence — through a dense attention sub-network.</p>
+          <div class="ac-tag">SMOTE · Focal Loss</div>
+        </div>
+        <div class="ac" data-delay="80">
+          <div class="ac-icon" style="background:linear-gradient(135deg,#d1fae5,#a7f3d0)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></svg>
+          </div>
+          <h3>Spatial Attention Module</h3>
+          <p>Identifies lesion-sensitive brain region activations from neuroimaging feature maps, applying spatial masks to highlight cerebrovascular risk zones.</p>
+          <div class="ac-tag">Attention Maps · EHR-Ready</div>
+        </div>
+        <div class="ac" data-delay="160">
+          <div class="ac-icon" style="background:linear-gradient(135deg,#ede9fe,#ddd6fe)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          </div>
+          <h3>Cross-Modal Fusion</h3>
+          <p>A dynamic attention fusion layer aligns spatial and clinical representations, enabling context-aware risk stratification that outperforms unimodal approaches.</p>
+          <div class="ac-tag">Context-Aware · Explainable</div>
+        </div>
+        <div class="ac" data-delay="240">
+          <div class="ac-icon" style="background:linear-gradient(135deg,#fef3c7,#fde68a)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          </div>
+          <h3>Personalised Roadmap</h3>
+          <p>Generates evidence-based, clinically prioritised prevention and recovery steps tailored to each patient's unique risk profile, downloadable as a PDF report.</p>
+          <div class="ac-tag">Evidence-Based · PDF Export</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ PREDICTOR ══════════ -->
+  <section class="predictor-section" id="predictor">
+    <div class="container">
+      <div class="section-eyebrow">Assessment Tool</div>
+      <h2 class="section-h2">Stroke Risk Assessment</h2>
+      <p class="section-p">Complete your clinical profile below. All inference is performed by the MACS-Net API server in real time.</p>
+
+      <!-- Live Risk Banner (realtime) -->
+      <div class="live-banner hidden" id="liveBanner">
+        <div class="live-banner-left">
+          <span class="live-dot"></span>
+          <span>Live Risk Preview</span>
+        </div>
+        <div class="live-risk-val" id="livePct">—</div>
+        <div class="live-bar-track"><div class="live-bar-fill" id="liveBar"></div></div>
+        <div class="live-level" id="liveLevel">—</div>
+      </div>
+
+      <div class="wizard-card">
+        <!-- Step Tabs -->
+        <div class="step-tabs">
+          <button class="step-tab active" data-tab="1">
+            <span class="tab-num">01</span>
+            <span class="tab-lbl">Personal Info</span>
+          </button>
+          <div class="tab-connector"></div>
+          <button class="step-tab" data-tab="2">
+            <span class="tab-num">02</span>
+            <span class="tab-lbl">Health Metrics</span>
+          </button>
+          <div class="tab-connector"></div>
+          <button class="step-tab" data-tab="3">
+            <span class="tab-num">03</span>
+            <span class="tab-lbl">Lifestyle</span>
+          </button>
+        </div>
+        <div class="wizard-progress"><div class="wp-fill" id="wpFill" style="width:33%"></div></div>
+
+        <form id="macsForm" novalidate autocomplete="off">
+
+          <!-- ── Step 1 ── -->
+          <div class="wiz-step active" id="step1">
+            <div class="step-body">
+              <div class="form-grid">
+                <div class="fg">
+                  <label for="f_name">Patient Name <span class="opt">(optional)</span></label>
+                  <div class="fi-wrap">
+                    <input type="text" id="f_name" placeholder="e.g. Ranjith Kumar" />
+                  </div>
+                </div>
+                <div class="fg">
+                  <label for="f_age">Age <span class="req">*</span></label>
+                  <div class="fi-wrap">
+                    <input type="number" id="f_age" min="1" max="100" placeholder="e.g. 52" required />
+                    <span class="fi-unit">yrs</span>
+                  </div>
+                  <input type="range" id="sl_age" class="slider" min="1" max="100" value="45" />
+                  <div class="sl-labels"><span>1</span><span>50</span><span>100</span></div>
+                </div>
+                <div class="fg">
+                  <label for="f_gender">Gender <span class="req">*</span></label>
+                  <div class="sel-wrap">
+                    <select id="f_gender" required>
+                      <option value="">— Select —</option>
+                      <option>Male</option><option>Female</option><option>Other</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="fg">
+                  <label for="f_married">Marital Status <span class="req">*</span></label>
+                  <div class="sel-wrap">
+                    <select id="f_married" required>
+                      <option value="">— Select —</option>
+                      <option value="Yes">Married / Was Married</option>
+                      <option value="No">Never Married</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="fg">
+                  <label for="f_work">Work Type <span class="req">*</span></label>
+                  <div class="sel-wrap">
+                    <select id="f_work" required>
+                      <option value="">— Select —</option>
+                      <option value="Private">Private Sector</option>
+                      <option value="Self-employed">Self-Employed</option>
+                      <option value="Govt_job">Government Job</option>
+                      <option value="children">Child / Student</option>
+                      <option value="Never_worked">Never Worked</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="fg">
+                  <label for="f_residence">Residence Type <span class="req">*</span></label>
+                  <div class="sel-wrap">
+                    <select id="f_residence" required>
+                      <option value="">— Select —</option>
+                      <option value="Urban">Urban</option>
+                      <option value="Rural">Rural</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="wiz-nav">
+              <div></div>
+              <button type="button" class="btn-next" onclick="gotoStep(2)">Next: Health Metrics →</button>
+            </div>
+          </div>
+
+          <!-- ── Step 2 ── -->
+          <div class="wiz-step" id="step2">
+            <div class="step-body">
+              <div class="form-grid">
+                <div class="fg full">
+                  <label>Medical Conditions</label>
+                  <div class="toggle-grid">
+                    <label class="tg-item">
+                      <div class="tg-header">
+                        <div class="tg-label">
+                          <span class="tg-emoji">❤️</span> Hypertension
+                          <span class="tg-sub">High BP ≥ 140/90</span>
+                        </div>
+                        <div class="toggle-sw">
+                          <input type="checkbox" id="f_htn" />
+                          <span class="sw-track"></span>
+                        </div>
+                      </div>
+                    </label>
+                    <label class="tg-item">
+                      <div class="tg-header">
+                        <div class="tg-label">
+                          <span class="tg-emoji">🫀</span> Heart Disease
+                          <span class="tg-sub">CAD, arrhythmia, etc.</span>
+                        </div>
+                        <div class="toggle-sw">
+                          <input type="checkbox" id="f_hd" />
+                          <span class="sw-track"></span>
+                        </div>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+                <div class="fg">
+                  <label for="f_glucose">Avg. Blood Glucose <span class="req">*</span></label>
+                  <div class="fi-wrap">
+                    <input type="number" id="f_glucose" min="50" max="300" step="0.1" placeholder="e.g. 106" required />
+                    <span class="fi-unit">mg/dL</span>
+                  </div>
+                  <input type="range" id="sl_glucose" class="slider" min="50" max="280" value="106" step="1"/>
+                  <div class="sl-labels"><span>50</span><span>165</span><span>280</span></div>
+                  <div class="glucose-badges">
+                    <span class="gb normal">Normal &lt;100</span>
+                    <span class="gb pre">Pre-DM 100–125</span>
+                    <span class="gb diabetic">Diabetic &gt;125</span>
+                  </div>
+                </div>
+                <div class="fg">
+                  <label for="f_bmi">BMI <span class="req">*</span></label>
+                  <div class="fi-wrap">
+                    <input type="number" id="f_bmi" min="10" max="100" step="0.1" placeholder="e.g. 28.9" required />
+                    <span class="fi-unit">kg/m²</span>
+                  </div>
+                  <input type="range" id="sl_bmi" class="slider" min="10" max="60" value="28" step="0.1"/>
+                  <div class="sl-labels"><span>10</span><span>35</span><span>60</span></div>
+                  <div class="bmi-pill" id="bmiPill"></div>
+                </div>
+              </div>
+            </div>
+            <div class="wiz-nav">
+              <button type="button" class="btn-back" onclick="gotoStep(1)">← Back</button>
+              <button type="button" class="btn-next" onclick="gotoStep(3)">Next: Lifestyle →</button>
+            </div>
+          </div>
+
+          <!-- ── Step 3 ── -->
+          <div class="wiz-step" id="step3">
+            <div class="step-body">
+              <div class="form-grid">
+                <div class="fg full">
+                  <label>Smoking Status <span class="req">*</span></label>
+                  <div class="radio-grid">
+                    <label class="rc"><input type="radio" name="smoking" value="never smoked" /><div class="rc-inner"><span>🚭</span><span>Never Smoked</span></div></label>
+                    <label class="rc"><input type="radio" name="smoking" value="formerly smoked" /><div class="rc-inner"><span>🕐</span><span>Formerly Smoked</span></div></label>
+                    <label class="rc"><input type="radio" name="smoking" value="smokes" /><div class="rc-inner"><span>🚬</span><span>Currently Smokes</span></div></label>
+                    <label class="rc"><input type="radio" name="smoking" value="Unknown" /><div class="rc-inner"><span>❓</span><span>Unknown</span></div></label>
+                  </div>
+                </div>
+                <div class="fg full">
+                  <div class="summary-preview" id="summaryPreview">
+                    <div class="sp-header">📋 Assessment Summary</div>
+                    <div class="sp-grid" id="spGrid">—</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="wiz-nav">
+              <button type="button" class="btn-back" onclick="gotoStep(2)">← Back</button>
+              <button type="submit" class="btn-submit" id="submitBtn">
+                <span class="sub-text">
+                  <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/></svg>
+                  Run MACS-Net Assessment
+                </span>
+                <span class="sub-loading" style="display:none">
+                  <span class="spin"></span> Analysing with AI…
+                </span>
+              </button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ RESULTS ══════════ -->
+  <section class="results-section hidden" id="result-section">
+    <div class="container">
+      <div id="pdf-report">
+
+        <!-- Report Header -->
+        <div class="report-header">
+          <div class="rh-brand">
+            <div class="rh-brand-icon">
+              <svg viewBox="0 0 44 44" fill="none">
+                <circle cx="22" cy="22" r="20" stroke="url(#rg)" stroke-width="2"/>
+                <path d="M10 22 L15 15 L20 27 L25 10 L30 22" stroke="url(#rg)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                <defs><linearGradient id="rg" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse"><stop stop-color="#2563EB"/><stop offset="1" stop-color="#059669"/></linearGradient></defs>
+              </svg>
+            </div>
+            <div>
+              <div class="rh-title">MACS-Net Stroke Risk Report</div>
+              <div class="rh-sub">Multi-modal Attention-driven Clinical and Spatial Network</div>
+            </div>
+          </div>
+          <div class="rh-meta">
+            <div class="rh-patient" id="rh_patient">—</div>
+            <div class="rh-date" id="rh_date">—</div>
+            <div class="rh-badge" id="rh_badge">—</div>
+          </div>
+        </div>
+
+        <!-- Gauge + Factors Row -->
+        <div class="gauge-row">
+          <div class="gauge-card">
+            <h3 class="card-title">AI Risk Score</h3>
+            <div class="gauge-wrap">
+              <svg class="gauge-svg" viewBox="0 0 220 130">
+                <defs>
+                  <linearGradient id="gaugeG" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%"   stop-color="#059669"/>
+                    <stop offset="45%"  stop-color="#D97706"/>
+                    <stop offset="100%" stop-color="#DC2626"/>
+                  </linearGradient>
+                </defs>
+                <path d="M 22 118 A 88 88 0 0 1 198 118" stroke="#EEF2FF" stroke-width="20" fill="none" stroke-linecap="round"/>
+                <path id="gaugeArc" d="M 22 118 A 88 88 0 0 1 198 118" stroke="url(#gaugeG)" stroke-width="20" fill="none" stroke-linecap="round" stroke-dasharray="276.5" stroke-dashoffset="276.5"/>
+                <line id="gaugeNeedle" x1="110" y1="118" x2="110" y2="42" stroke="#1E293B" stroke-width="3.5" stroke-linecap="round" transform="rotate(0 110 118)"/>
+                <circle cx="110" cy="118" r="8" fill="#1E293B"/>
+                <circle cx="110" cy="118" r="4" fill="white"/>
+              </svg>
+              <div class="gauge-pct" id="gaugePct">0%</div>
+              <div class="gauge-lbl">Stroke Risk Probability</div>
+              <div class="gauge-inf" id="gaugeInf">—</div>
+            </div>
+          </div>
+          <div class="factors-card">
+            <h3 class="card-title">Risk Factor Analysis</h3>
+            <div class="factors-list" id="factorsList"></div>
+          </div>
+        </div>
+
+        <!-- Clinical Profile + Risk Bars -->
+        <div class="analysis-row">
+          <div class="analysis-card">
+            <h3 class="card-title">📋 Clinical Profile</h3>
+            <div class="profile-list" id="profileList"></div>
+          </div>
+          <div class="analysis-card">
+            <h3 class="card-title">📊 Factor Risk Bars</h3>
+            <div class="bar-list" id="barList"></div>
+          </div>
+        </div>
+
+        <!-- Model Info -->
+        <div class="model-info-card" id="modelInfoCard"></div>
+
+        <!-- Roadmap -->
+        <div class="roadmap-card">
+          <div class="rm-header">
+            <div class="rm-title">🗺️ Personalised Prevention & Recovery Roadmap</div>
+            <div class="rm-sub" id="rmSub"></div>
+          </div>
+          <div class="rm-steps" id="rmSteps"></div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="disclaimer">
+          <span class="disc-icon">⚕️</span>
+          <div>
+            <strong>Medical Disclaimer</strong>
+            <p>This AI-generated report is for informational purposes only and does not constitute medical advice, diagnosis, or treatment. Always consult a qualified healthcare provider. Model trained on Kaggle Stroke Dataset (5,110 patients) using MACS-Net CFE architecture with SMOTE and ensemble methods.</p>
+          </div>
+        </div>
+
+      </div><!-- /pdf-report -->
+
+      <!-- Action Bar -->
+      <div class="action-bar">
+        <button class="btn-pdf" id="btnPdf" onclick="downloadPDF()">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+          Download PDF Report
+        </button>
+        <button class="btn-share" onclick="shareReport()">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z"/></svg>
+          Share Results
+        </button>
+        <button class="btn-restart" onclick="restartApp()">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/></svg>
+          New Assessment
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="brand-text">MACS<em>Net</em></span>
+        <p>Multi-modal Attention-driven Clinical & Spatial Network</p>
+      </div>
+      <div class="footer-pills">
+        <span>Kaggle Stroke Dataset · 5,110 records</span>
+        <span>Random Forest + GB Ensemble</span>
+        <span>SMOTE · 5-fold CV · Focal Loss</span>
+        <span>For Research &amp; Clinical Decision Support</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast -->
+  <div id="toast" class="toast-el" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

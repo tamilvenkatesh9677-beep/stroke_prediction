@@ -1,0 +1,33 @@
+{
+  "total_patients": 5109,
+  "stroke_cases": 249,
+  "stroke_rate": 4.87,
+  "age_mean": 43.2,
+  "age_std": 22.6,
+  "glucose_mean": 106.1,
+  "glucose_std": 45.3,
+  "bmi_mean": 28.9,
+  "bmi_std": 7.7,
+  "gender_dist": {
+    "Female": 2994,
+    "Male": 2115
+  },
+  "smoking_dist": {
+    "never smoked": 1892,
+    "Unknown": 1544,
+    "formerly smoked": 884,
+    "smokes": 789
+  },
+  "hypertension_stroke_rate": 13.25,
+  "heart_disease_stroke_rate": 17.03,
+  "model_performance": {
+    "cv_roc_auc_mean": 0.8047,
+    "cv_roc_auc_std": 0.0149,
+    "cv_recall_mean": 0.1406,
+    "train_roc_auc": 0.9847,
+    "train_recall": 0.9438,
+    "train_precision": 0.395,
+    "train_f1": 0.5569,
+    "threshold": 0.35
+  }
+}

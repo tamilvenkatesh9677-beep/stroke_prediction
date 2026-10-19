@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MACS-Net | Stroke Risk Intelligence Platform</title>
+  <meta name="description" content="AI-powered stroke risk assessment and personalized recovery planning using the MACS-Net multi-modal deep learning model." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- jsPDF + AutoTable for programmatic PDF generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+
+  <!-- Animated Background Orbs -->
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- Header / Navbar -->
+  <header class="navbar" id="navbar">
+    <div class="navbar-inner">
+      <div class="logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="18" stroke="url(#g1)" stroke-width="2.5"/>
+            <path d="M12 20 L16 15 L20 24 L24 12 L28 20" stroke="url(#g1)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#2563EB"/>
+                <stop offset="1" stop-color="#059669"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <span class="logo-text">MACS<span class="logo-accent">Net</span></span>
+      </div>
+      <nav class="nav-links">
+        <a href="#hero" class="nav-link active">Home</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#predictor" class="nav-link">Predict</a>
+        <a href="#result-section" class="nav-link">Results</a>
+      </nav>
+      <a href="#predictor" class="nav-cta">Start Assessment</a>
+    </div>
+  </header>
+
+  <!-- ══════════════ HERO SECTION ══════════════ -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        AI-Powered Medical Intelligence
+      </div>
+      <h1 class="hero-title">
+        Know Your Stroke Risk<br/>
+        <span class="gradient-text">Before It Happens</span>
+      </h1>
+      <p class="hero-subtitle">
+        MACS-Net uses multi-modal attention deep learning trained on 5,110 patient records
+        to assess your stroke risk and generate a personalized recovery & prevention roadmap.
+      </p>
+      <div class="hero-actions">
+        <a href="#predictor" class="btn-primary">
+          <svg class="btn-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M9 4a5 5 0 100 10A5 5 0 009 4zM2 9a7 7 0 1112.452 4.391l3.328 3.329a1 1 0 11-1.414 1.414l-3.329-3.328A7 7 0 012 9z"/></svg>
+          Assess My Risk
+        </a>
+        <a href="#about" class="btn-secondary">Learn More →</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-card">
+          <div class="stat-value">5,110</div>
+          <div class="stat-label">Patient Records</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-card">
+          <div class="stat-value">94.4%</div>
+          <div class="stat-label">Stroke Recall</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-card">
+          <div class="stat-value">0.98</div>
+          <div class="stat-label">ROC-AUC Score</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-card">
+          <div class="stat-value">Real-Time</div>
+          <div class="stat-label">AI Inference</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="brain-card">
+        <div class="brain-ring ring-1"></div>
+        <div class="brain-ring ring-2"></div>
+        <div class="brain-ring ring-3"></div>
+        <div class="brain-core">
+          <svg viewBox="0 0 80 80" fill="none" class="brain-svg">
+            <ellipse cx="40" cy="38" rx="26" ry="22" stroke="#2563EB" stroke-width="2" opacity="0.6"/>
+            <path d="M14 38 Q20 20 40 18 Q60 20 66 38 Q60 56 40 58 Q20 56 14 38Z" stroke="#059669" stroke-width="1.5" fill="none" opacity="0.5"/>
+            <line x1="40" y1="16" x2="40" y2="60" stroke="#7C3AED" stroke-width="1" stroke-dasharray="3,3"/>
+            <path d="M25 28 Q30 24 35 30 Q38 33 40 30 Q42 27 45 32 Q50 26 55 30" stroke="#2563EB" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+            <path d="M20 42 Q28 48 35 44 Q40 42 45 46 Q52 50 60 44" stroke="#059669" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+            <circle cx="40" cy="38" r="4" fill="url(#bc)" opacity="0.9"/>
+            <defs>
+              <radialGradient id="bc">
+                <stop stop-color="#2563EB"/>
+                <stop offset="1" stop-color="#059669"/>
+              </radialGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="floating-metric metric-1">
+          <span class="metric-icon">🫀</span>
+          <span>Heart Rate</span>
+          <strong>72 bpm</strong>
+        </div>
+        <div class="floating-metric metric-2">
+          <span class="metric-icon">🩸</span>
+          <span>Glucose</span>
+          <strong>106 mg/dL</strong>
+        </div>
+        <div class="floating-metric metric-3">
+          <span class="metric-icon">⚡</span>
+          <span>Risk Score</span>
+          <strong>Low</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ ABOUT SECTION ══════════════ -->
+  <section class="about" id="about">
+    <div class="section-container">
+      <div class="section-badge">How It Works</div>
+      <h2 class="section-title">Multi-Modal AI Architecture</h2>
+      <p class="section-subtitle">MACS-Net combines clinical features with spatial attention mechanisms to deliver a holistic stroke risk assessment.</p>
+      <div class="about-grid">
+        <div class="about-card" data-delay="0">
+          <div class="about-card-icon" style="background: linear-gradient(135deg, #dbeafe, #bfdbfe);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
+          </div>
+          <h3>Clinical Feature Encoder</h3>
+          <p>Processes 11 clinical indicators including age, hypertension, glucose, BMI, and lifestyle factors through a dense attention network.</p>
+        </div>
+        <div class="about-card" data-delay="100">
+          <div class="about-card-icon" style="background: linear-gradient(135deg, #d1fae5, #a7f3d0);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 0v20M2 12h20"/></svg>
+          </div>
+          <h3>Spatial Attention Module</h3>
+          <p>Identifies critical brain regions with potential lesion activity by applying attention masks to neuroimaging spatial feature maps.</p>
+        </div>
+        <div class="about-card" data-delay="200">
+          <div class="about-card-icon" style="background: linear-gradient(135deg, #ede9fe, #ddd6fe);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          </div>
+          <h3>Cross-Modal Fusion</h3>
+          <p>Attention-driven fusion layer aligns clinical risk factors with spatial brain patterns to produce the final risk probability.</p>
+        </div>
+        <div class="about-card" data-delay="300">
+          <div class="about-card-icon" style="background: linear-gradient(135deg, #fef3c7, #fde68a);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          </div>
+          <h3>Personalised Roadmap</h3>
+          <p>Generates evidence-based, step-by-step prevention and recovery plans tailored to each patient's unique clinical profile.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ PREDICTOR SECTION ══════════════ -->
+  <section class="predictor-section" id="predictor">
+    <div class="section-container">
+      <div class="section-badge">Assessment Tool</div>
+      <h2 class="section-title">Stroke Risk Assessment</h2>
+      <p class="section-subtitle">Fill in your clinical details below. All computations happen locally — your data never leaves your device.</p>
+
+      <div class="predictor-card">
+        <form id="predictForm" novalidate>
+
+          <!-- Step 1: Personal Info -->
+          <div class="form-step active" data-step="1">
+            <div class="step-header">
+              <div class="step-number">01</div>
+              <div class="step-info">
+                <h3>Personal Information</h3>
+                <p>Basic demographic details</p>
+              </div>
+              <div class="step-progress">Step 1 of 3</div>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="age">Age (years)</label>
+                <div class="input-wrapper">
+                  <input type="number" id="age" name="age" min="1" max="100" placeholder="e.g. 45" required />
+                  <span class="input-unit">yrs</span>
+                </div>
+                <div class="slider-track">
+                  <input type="range" id="age_slider" min="1" max="100" value="45" />
+                  <div class="slider-labels"><span>1</span><span>50</span><span>100</span></div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="gender">Gender</label>
+                <div class="select-wrapper">
+                  <select id="gender" name="gender" required>
+                    <option value="">— Select —</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="ever_married">Marital Status</label>
+                <div class="select-wrapper">
+                  <select id="ever_married" name="ever_married" required>
+                    <option value="">— Select —</option>
+                    <option value="Yes">Married / Previously Married</option>
+                    <option value="No">Never Married</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="work_type">Work Type</label>
+                <div class="select-wrapper">
+                  <select id="work_type" name="work_type" required>
+                    <option value="">— Select —</option>
+                    <option value="Private">Private Sector</option>
+                    <option value="Self-employed">Self-Employed</option>
+                    <option value="Govt_job">Government Job</option>
+                    <option value="children">Child / Student</option>
+                    <option value="Never_worked">Never Worked</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="Residence_type">Residence Type</label>
+                <div class="select-wrapper">
+                  <select id="Residence_type" name="Residence_type" required>
+                    <option value="">— Select —</option>
+                    <option value="Urban">Urban</option>
+                    <option value="Rural">Rural</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="form-nav">
+              <button type="button" class="btn-next" onclick="nextStep(1)">Next: Health Metrics →</button>
+            </div>
+          </div>
+
+          <!-- Step 2: Health Metrics -->
+          <div class="form-step" data-step="2">
+            <div class="step-header">
+              <div class="step-number">02</div>
+              <div class="step-info">
+                <h3>Health Metrics</h3>
+                <p>Clinical measurements and conditions</p>
+              </div>
+              <div class="step-progress">Step 2 of 3</div>
+            </div>
+            <div class="form-grid">
+              <div class="form-group full-width">
+                <label>Medical Conditions</label>
+                <div class="toggle-group">
+                  <div class="toggle-item">
+                    <div class="toggle-header">
+                      <div class="toggle-label">
+                        <svg viewBox="0 0 20 20" fill="currentColor"><path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"/></svg>
+                        Hypertension
+                      </div>
+                      <label class="toggle-switch">
+                        <input type="checkbox" id="hypertension" name="hypertension" />
+                        <span class="toggle-slider"></span>
+                      </label>
+                    </div>
+                    <p class="toggle-desc">High blood pressure (≥140/90 mmHg)</p>
+                  </div>
+                  <div class="toggle-item">
+                    <div class="toggle-header">
+                      <div class="toggle-label">
+                        <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/></svg>
+                        Heart Disease
+                      </div>
+                      <label class="toggle-switch">
+                        <input type="checkbox" id="heart_disease" name="heart_disease" />
+                        <span class="toggle-slider"></span>
+                      </label>
+                    </div>
+                    <p class="toggle-desc">Coronary artery disease, arrhythmia, or other cardiac conditions</p>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="avg_glucose_level">Average Blood Glucose (mg/dL)</label>
+                <div class="input-wrapper">
+                  <input type="number" id="avg_glucose_level" name="avg_glucose_level" min="55" max="280" step="0.1" placeholder="e.g. 106" required />
+                  <span class="input-unit">mg/dL</span>
+                </div>
+                <div class="slider-track">
+                  <input type="range" id="glucose_slider" min="55" max="280" value="106" step="1" />
+                  <div class="slider-labels"><span>55</span><span>167</span><span>280</span></div>
+                </div>
+                <div class="glucose-scale">
+                  <span class="scale-normal">Normal: &lt;100</span>
+                  <span class="scale-pre">Pre-diabetic: 100–125</span>
+                  <span class="scale-diabetic">Diabetic: &gt;125</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="bmi">Body Mass Index (BMI)</label>
+                <div class="input-wrapper">
+                  <input type="number" id="bmi" name="bmi" min="10" max="100" step="0.1" placeholder="e.g. 28.9" required />
+                  <span class="input-unit">kg/m²</span>
+                </div>
+                <div class="slider-track">
+                  <input type="range" id="bmi_slider" min="10" max="60" value="28" step="0.1" />
+                  <div class="slider-labels"><span>10</span><span>35</span><span>60</span></div>
+                </div>
+                <div id="bmi_category" class="bmi-category">—</div>
+              </div>
+            </div>
+            <div class="form-nav">
+              <button type="button" class="btn-back" onclick="prevStep(2)">← Back</button>
+              <button type="button" class="btn-next" onclick="nextStep(2)">Next: Lifestyle →</button>
+            </div>
+          </div>
+
+          <!-- Step 3: Lifestyle -->
+          <div class="form-step" data-step="3">
+            <div class="step-header">
+              <div class="step-number">03</div>
+              <div class="step-info">
+                <h3>Lifestyle Factors</h3>
+                <p>Habits and lifestyle choices</p>
+              </div>
+              <div class="step-progress">Step 3 of 3</div>
+            </div>
+            <div class="form-grid">
+              <div class="form-group full-width">
+                <label>Smoking Status</label>
+                <div class="radio-group">
+                  <label class="radio-card">
+                    <input type="radio" name="smoking_status" value="never smoked" />
+                    <div class="radio-content">
+                      <span class="radio-icon">🚭</span>
+                      <span>Never Smoked</span>
+                    </div>
+                  </label>
+                  <label class="radio-card">
+                    <input type="radio" name="smoking_status" value="formerly smoked" />
+                    <div class="radio-content">
+                      <span class="radio-icon">🕐</span>
+                      <span>Formerly Smoked</span>
+                    </div>
+                  </label>
+                  <label class="radio-card">
+                    <input type="radio" name="smoking_status" value="smokes" />
+                    <div class="radio-content">
+                      <span class="radio-icon">🚬</span>
+                      <span>Currently Smokes</span>
+                    </div>
+                  </label>
+                  <label class="radio-card">
+                    <input type="radio" name="smoking_status" value="Unknown" />
+                    <div class="radio-content">
+                      <span class="radio-icon">❓</span>
+                      <span>Unknown</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group full-width">
+                <label>Patient Name (for report)</label>
+                <div class="input-wrapper">
+                  <input type="text" id="patient_name" name="patient_name" placeholder="Enter your name (optional)" />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-nav">
+              <button type="button" class="btn-back" onclick="prevStep(3)">← Back</button>
+              <button type="submit" class="btn-predict" id="predictBtn">
+                <span class="btn-text">
+                  <svg class="btn-icon" viewBox="0 0 20 20" fill="currentColor"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/></svg>
+                  Run AI Assessment
+                </span>
+                <span class="btn-loader" style="display:none;">
+                  <span class="spinner"></span> Analysing...
+                </span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Progress Bar -->
+          <div class="form-progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 33%"></div>
+          </div>
+          <div class="form-step-dots">
+            <div class="dot active" data-step="1"></div>
+            <div class="dot" data-step="2"></div>
+            <div class="dot" data-step="3"></div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ RESULTS SECTION ══════════════ -->
+  <section class="result-section hidden" id="result-section">
+    <div class="section-container">
+
+      <div id="pdf-content">
+        <!-- Risk Gauge Card -->
+        <div class="result-header-card" id="riskCard">
+          <div class="result-patient-info">
+            <div class="patient-avatar" id="patientAvatar">P</div>
+            <div>
+              <div class="patient-name" id="patientNameDisplay">Patient</div>
+              <div class="patient-date" id="reportDate">Assessment Date: —</div>
+            </div>
+            <div class="result-badge" id="resultBadge">—</div>
+          </div>
+
+          <div class="gauge-container">
+            <div class="gauge-wrapper">
+              <svg class="gauge-svg" viewBox="0 0 200 120">
+                <defs>
+                  <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#059669"/>
+                    <stop offset="50%" stop-color="#D97706"/>
+                    <stop offset="100%" stop-color="#DC2626"/>
+                  </linearGradient>
+                </defs>
+                <!-- Background arc -->
+                <path d="M 20 110 A 80 80 0 0 1 180 110" stroke="#E5E7EB" stroke-width="18" fill="none" stroke-linecap="round"/>
+                <!-- Coloured arc -->
+                <path id="gaugeArc" d="M 20 110 A 80 80 0 0 1 180 110" stroke="url(#gaugeGrad)" stroke-width="18" fill="none" stroke-linecap="round" stroke-dasharray="251.3" stroke-dashoffset="251.3"/>
+                <!-- Needle -->
+                <line id="gaugeNeedle" x1="100" y1="110" x2="100" y2="40" stroke="#1E293B" stroke-width="3" stroke-linecap="round" transform="rotate(0, 100, 110)"/>
+                <circle cx="100" cy="110" r="7" fill="#1E293B"/>
+              </svg>
+              <div class="gauge-value" id="gaugeValue">0%</div>
+              <div class="gauge-label">Risk Probability</div>
+            </div>
+          </div>
+
+          <div class="risk-factors-grid" id="riskFactorsGrid"></div>
+        </div>
+
+        <!-- Detailed Analysis -->
+        <div class="analysis-grid">
+          <div class="analysis-card">
+            <h3 class="analysis-title">
+              <span class="analysis-icon">📊</span>
+              Clinical Profile Summary
+            </h3>
+            <div class="profile-table" id="profileTable"></div>
+          </div>
+          <div class="analysis-card">
+            <h3 class="analysis-title">
+              <span class="analysis-icon">⚠️</span>
+              Risk Factor Analysis
+            </h3>
+            <div class="risk-bars" id="riskBars"></div>
+          </div>
+        </div>
+
+        <!-- Recovery Roadmap -->
+        <div class="roadmap-section" id="roadmapSection">
+          <h2 class="roadmap-title">
+            <span>🗺️</span>
+            Personalised Prevention & Recovery Roadmap
+          </h2>
+          <p class="roadmap-subtitle" id="roadmapSubtitle"></p>
+          <div class="roadmap-steps" id="roadmapSteps"></div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="disclaimer-card">
+          <div class="disclaimer-icon">⚕️</div>
+          <div>
+            <strong>Medical Disclaimer</strong>
+            <p>This AI assessment is for informational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment. Always consult a qualified healthcare provider. This tool uses the MACS-Net model trained on the Kaggle Stroke Prediction Dataset.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="download-bar">
+        <button class="btn-download" onclick="downloadPDF()">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+          Download PDF Report
+        </button>
+        <button class="btn-sendmail" id="sendMailBtn" onclick="openEmailModal()">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg>
+          Send to Mail
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ EMAIL MODAL ══════════════ -->
+  <div class="email-modal-overlay" id="emailModalOverlay" onclick="closeEmailModal(event)">
+    <div class="email-modal" id="emailModal">
+
+      <!-- Modal Header -->
+      <div class="email-modal-header">
+        <div class="email-modal-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="email-modal-title">Send Report via Email</h3>
+          <p class="email-modal-subtitle">Your PDF report will be delivered as an attachment</p>
+        </div>
+        <button class="email-modal-close" onclick="closeEmailModal()" aria-label="Close">
+          <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+        </button>
+      </div>
+
+      <!-- Patient Preview Strip -->
+      <div class="email-patient-strip" id="emailPatientStrip">
+        <div class="email-patient-avatar" id="emailAvatar">P</div>
+        <div class="email-patient-info">
+          <div class="email-patient-name" id="emailPatientName">—</div>
+          <div class="email-patient-risk" id="emailPatientRisk">—</div>
+        </div>
+      </div>
+
+      <!-- Email Input -->
+      <div class="email-input-group">
+        <label for="recipientEmail" class="email-label">
+          <svg viewBox="0 0 20 20" fill="currentColor" style="width:14px;height:14px;">
+            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+          </svg>
+          Recipient Email Address
+        </label>
+        <div class="email-input-wrapper">
+          <input
+            type="email"
+            id="recipientEmail"
+            class="email-input"
+            placeholder="e.g. patient@example.com"
+            autocomplete="email"
+            onkeydown="if(event.key==='Enter') sendReportByEmail()"
+          />
+          <span class="email-input-icon">@</span>
+        </div>
+        <p class="email-hint">The full PDF report will be sent as an attachment from MACS-Net AI.</p>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="email-modal-actions">
+        <button class="email-btn-cancel" onclick="closeEmailModal()">Cancel</button>
+        <button class="email-btn-send" id="emailSendBtn" onclick="sendReportByEmail()">
+          <span class="email-btn-text">
+            <svg viewBox="0 0 20 20" fill="currentColor" style="width:16px;height:16px;">
+              <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"/>
+            </svg>
+            Send Report
+          </span>
+          <span class="email-btn-loader" style="display:none;">
+            <span class="email-spinner"></span> Sending…
+          </span>
+        </button>
+      </div>
+
+      <!-- Status Message -->
+      <div class="email-status" id="emailStatus" style="display:none;"></div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <span class="logo-text">MACS<span class="logo-accent">Net</span></span>
+        <p>Multi-modal Attention Clinical Stroke Network</p>
+      </div>
+      <div class="footer-links">
+        <span>Built on Kaggle Stroke Dataset (5,110 records)</span>
+        <span>•</span>
+        <span>Random Forest + Gradient Boosting Ensemble</span>
+        <span>•</span>
+        <span>For Research Use Only</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
